@@ -3,6 +3,7 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	getAuth,
+	signOut,
 	//Google Auth
 	GoogleAuthProvider,
 	signInWithPopup,
@@ -36,7 +37,11 @@ export const loginInWithEmailAndPassword = async (email: string, password: strin
 export const signInWithGoogle = async () => {
 	try {
 		const userCredential = await signInWithPopup(auth, googleProvider);
-		return userCredential;
+		const email = userCredential.user.email;
+
+		if (email?.endsWith('@rootstrap.com')) return userCredential;
+
+		await signOut(auth);
 	} catch (error) {
 		return error;
 	}
