@@ -9,9 +9,7 @@ import googleAuth from '@/public/icons/google-auth.svg';
 const Home = () => {
 	const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		const credentials = await signInWithGoogle();
-		console.log({ credentials });
+		await signInWithGoogle();
 	};
 
 	return (
