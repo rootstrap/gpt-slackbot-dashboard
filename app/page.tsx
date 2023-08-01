@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { LoginForm } from '@/components/LoginForm';
+import { LoginForm } from '@/app/components/LoginForm';
 
 const Home = () => {
 	return (
