@@ -7,9 +7,10 @@ import {
 	//Google Auth
 	GoogleAuthProvider,
 	signInWithPopup,
+	UserCredential,
 } from 'firebase/auth';
 
-import { app } from './firebaseConfig';
+import { app } from '@/firebase/firebaseAppConfig';
 
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
@@ -34,15 +35,21 @@ export const loginInWithEmailAndPassword = async (email: string, password: strin
 };
 
 /* Functions to handle auth with google */
-export const signInWithGoogle = async () => {
+export const signInWithGoogle = async (): Promise<UserCredential> => {
 	try {
 		const userCredential = await signInWithPopup(auth, googleProvider);
 		const email = userCredential.user.email;
 
-		if (email?.endsWith('@rootstrap.com')) return userCredential;
+		if (email?.endsWith('@rootstrap.com')) {
+			await signOut(auth);
+		}
 
-		await signOut(auth);
+		return userCredential;
 	} catch (error) {
-		return error;
+		throw new Error(JSON.stringify(error));
 	}
+};
+
+export const getCurrentUser = () => {
+	return auth.currentUser;
 };
