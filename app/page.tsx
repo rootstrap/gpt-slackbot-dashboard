@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { LoginForm } from '@/app/components/LoginForm';
 
-const Home = () => {
+const LoginPage = () => {
 	return (
 		<main className='flex min-h-screen flex-col items-center justify-between p-24'>
 			<LoginForm />
@@ -10,4 +10,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default LoginPage;
