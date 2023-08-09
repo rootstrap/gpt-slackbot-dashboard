@@ -7,6 +7,7 @@ import { customInitializeApp } from '@/firebase/firebaseAdminConfig';
 /* Initi Firebase Admin App once the server is called */
 customInitializeApp();
 
+/* Total of 5 days */
 const EXPIRATION_TIME = 60 * 60 * 24 * 5 * 1000;
 
 /* Create Session in Firebase */
