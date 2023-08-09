@@ -1,5 +1,6 @@
 'use client';
 import * as React from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import cn from 'classnames';
 
@@ -7,9 +8,27 @@ import { signInWithGoogle } from '@/services/auth';
 import googleAuth from '@/public/icons/google-auth.svg';
 
 export const LoginForm = () => {
+	const router = useRouter();
+	const [isAuthenticating, setIsAuthenticating] = React.useState(false);
+
 	const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		await signInWithGoogle();
+
+		const credentials = await signInWithGoogle();
+		const idToken = await credentials.user.getIdToken();
+
+		if (!idToken) return;
+
+		const response = await fetch('/api/auth', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${idToken}`,
+			},
+		});
+
+		if (response.ok && response.status === 200) {
+			router.push('/dashboard');
+		}
 	};
 
 	return (
@@ -23,8 +42,14 @@ export const LoginForm = () => {
 					'active:outline-none md:w-[360px]'
 				)}
 			>
-				<Image src={googleAuth} alt='google-auth' width={20} height={20} />
-				<p>Sign in with Google</p>
+				{isAuthenticating ? (
+					'Authenticating...'
+				) : (
+					<>
+						<Image src={googleAuth} alt='google-auth' width={20} height={20} />
+						<p>Sign in with Google</p>
+					</>
+				)}
 			</button>
 		</form>
 	);

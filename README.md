@@ -2,7 +2,20 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Make sure you have the `env` file in place and the `FIREBASE_SECRET_KEYS.json` file in the root directory.
+
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyA3pwBM4EJL8_Tc8Ya7PWwlZ-j14Pfz090
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=gpt-slackbot-dashboard.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=gpt-slackbot-dashboard
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=gpt-slackbot-dashboard.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=283202584708
+NEXT_PUBLIC_FIREBASE_APP_ID=1:283202584708:web:2cee33a7b1d89f600702d1
+
+FIREBASE_KEYS_PATH=../../../../../FIREBASE_SECRET_KEYS.json
+```
+
+Run the development server:
 
 ```bash
 npm run dev
